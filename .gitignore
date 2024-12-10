@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+build/
+dist/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor-specific files
+.idea/
+.vscode/
+*.swp
+
+# Dependency directories
+.pnp/
+.pnp.js
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+
+# Miscellaneous
+*.log
+*.lock
+!.gitkeep
+
+# Ignore everything in the node_modules folder except some subfolders
+node_modules/*
+!node_modules/react/
+!node_modules/react-dom/

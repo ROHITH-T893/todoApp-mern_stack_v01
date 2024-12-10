@@ -1,0 +1,76 @@
+const express = require('express');
+const router = express.Router();
+const todom = require('../models/todoM.js');
+const mongoose = require('mongoose');
+
+// Middleware for checking ObjectId validity
+const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+
+router.route('/get')
+    .get(async (req, res, next) => {
+        try {
+            const data = await todom.find();
+            res.status(202).json({ message: 'Data fetching successful', data });
+        } catch (err) {
+            res.status(500).json({ message: 'Error fetching data', error: err.message });
+        }
+    })
+    .patch(async (req, res, next) => {
+        try {
+            const { _id, ...updates } = req.body;
+            
+            // Validate _id
+            if (!_id || !isValidObjectId(_id)) {
+                return res.status(400).json({ message: 'Valid _id is required' });
+            }
+            
+            // Update document
+            const updatedTodo = await todom.findByIdAndUpdate(_id, updates, { new: true });
+            
+            if (!updatedTodo) {
+                return res.status(404).json({ message: 'Todo not found' });
+            }
+
+            res.status(200).json({ message: 'Todo updated', data: updatedTodo });
+        } catch (err) {
+            res.status(500).json({ message: 'Error updating todo', error: err.message });
+        }
+    })
+    .delete(async (req, res, next) => {
+        try {
+            const { _id } = req.body;
+
+            // Validate _id
+            if (!_id || !isValidObjectId(_id)) {
+                return res.status(400).json({ message: 'Valid _id is required' });
+            }
+
+            const deletedTodo = await todom.findByIdAndDelete(_id);
+
+            if (!deletedTodo) {
+                return res.status(404).json({ message: 'Todo not found' });
+            }
+
+            res.status(200).json({ message: 'Todo deleted successfully', data: deletedTodo });
+        } catch (err) {
+            res.status(500).json({ message: 'Error deleting todo', error: err.message });
+        }
+    })
+    .post(async (req, res) => {
+        const { title, description } = req.body;
+
+        // Validate input
+        if (!title || !description) {
+            return res.status(400).json({ message: 'Title and description are required' });
+        }
+
+        try {
+            const newTodo = new todom({ title, description });
+            const savedTodo = await newTodo.save();
+            res.status(201).json({ message: 'Todo added successfully', data: savedTodo });
+        } catch (err) {
+            res.status(500).json({ message: 'Error adding todo', error: err.message });
+        }
+    });
+
+module.exports = router;

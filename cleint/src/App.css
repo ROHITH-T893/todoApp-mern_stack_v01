@@ -1,0 +1,163 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.Model-content{
+    /* background: transparent; */
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 255, 255, 0.281); 
+    position: fixed;
+    -webkit-backdrop-filter: blur(10px);
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;   
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 300px;
+    position: relative;
+    align-items: center;
+    border-radius: 5px;
+    filter: drop-shadow(3px 4px 2px black);
+    padding: 10px;
+    background-color: rgba(30, 223, 188, 0.693);
+}
+#form p{
+    position: absolute;
+    bottom: 3px;
+}
+input{
+    border:none;
+    margin: 5px 10px;
+    border-radius: 5px;
+    padding:5px 10px;
+    background-color: antiquewhite;
+    outline: none;
+    color: black;
+}
+form button[type=submit]{
+    background-color: rgb(30, 0, 128);
+    width: 100%;
+    height: 35px;
+    border: none;
+    padding: 5px 10px;
+    margin: 0;
+    margin-top: 20px;
+   border-radius: 5px;
+   filter: drop-shadow(2px 2px 2px rgb(0, 255, 229));
+}
+form button[type=button]{
+    background-color: rgb(128, 6, 0);
+    height: 35px;
+    width: 100%;
+    border: none;
+    margin-top: 20px;
+    padding: 5px 10px;
+    margin-top: 20px;
+   border-radius: 5px;
+   filter: drop-shadow(2px 2px 2px rgb(0, 255, 229));
+}
+label[for=title]{
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+label[for=description]{
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.con{
+     width: 100vw;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     background-color: #0a6b7090;
+}
+.title-hold{
+    display: flex;
+    align-items: center;
+    width: 90%;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: rgba(30, 223, 188, 0.693);
+  border-radius: 5px;
+  filter: drop-shadow(2px 4px 5px aqua);
+}
+.title-hold h1{
+    color: rgb(0, 43, 43);
+}
+.title-hold button{
+    width: 80px;
+    height: 35px;
+    border-radius: 55px;
+    border: none;
+    background-color:rgb(0, 43, 43);
+    filter: drop-shadow(6px 6px 8px rgba(5, 32, 26, 0.693));
+}
+.todos{
+    width: 90vw;
+    margin-top: 20px;
+}
+.todo-con{
+    width: 99%;
+    display: flex;
+    padding: 10px;
+    border-radius:5px;
+    margin-bottom: 2px;
+    justify-content: space-between;
+    background-color: rgba(41, 60, 77, 0.442);
+}
+.todo-con:nth-child(2n){
+    background-color: rgba(39, 38, 36, 0.319);
+}
+.todo-con h1{
+    font-size: medium;
+}
+.btn-con{
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.todo-con button[id='edit']{
+    width: 50px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: small;
+    background-color: rgba(0, 255, 255, 0.341);
+    padding: 3px 8px;
+}
+.todo-con button[id='delete']{
+    width: 50px;
+    margin-bottom: 5px;
+    background-color: rgba(215, 7, 7, 0.307);
+    border: none;
+    border-radius: 5px;
+    font-size: small;
+    padding: 3px 8px;
+}
+.footer{
+    margin-top: 20px;
+    width: 100vw;
+    height: 60px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: end;   
+}
+.footer span{
+    color: rgba(0, 255, 255, 0.281);
+}

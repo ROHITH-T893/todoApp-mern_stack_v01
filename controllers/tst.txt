@@ -1,0 +1,68 @@
+const express = require('express');
+const router = express.Router();
+const todom = require('../models/todoM.js');
+
+// Route for GET request
+router.route('/get').get(async (req, res, next) => {
+    try {
+        const data = await todom.find();
+        res.status(202).json({ message: 'Data fetching successful', data });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching data', error: error.message });
+    }
+});
+
+// Route for PATCH request
+router.route('/get').patch(async (req, res, next) => {
+    try {
+        const { _id, ...updates } = req.body;
+        if (!_id) {
+            return res.status(400).json({ message: '_id is required' });
+        }
+
+        const updatedTodo = await todom.findByIdAndUpdate(_id, updates, { new: true });
+        if (!updatedTodo) {
+            return res.status(404).json({ message: 'Todo not found' });
+        }
+
+        res.status(200).json({ message: 'Todo updated successfully', data: updatedTodo });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating todo', error: error.message });
+    }
+});
+
+// Route for DELETE request
+router.route('/get').delete(async (req, res, next) => {
+    try {
+        const { _id } = req.body;
+        if (!_id) {
+            return res.status(400).json({ message: '_id is required' });
+        }
+
+        const deletedTodo = await todom.findByIdAndDelete(_id);
+        if (!deletedTodo) {
+            return res.status(404).json({ message: 'Todo not found' });
+        }
+
+        res.status(200).json({ message: 'Todo deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting todo', error: error.message });
+    }
+});
+
+// Route for POST request
+router.route('/get').post(async (req, res) => {
+    try {
+        const { title, description } = req.body;
+        if (!title || !description) {
+            return res.status(400).json({ message: 'Title and description are required' });
+        }
+
+        const result = await todom.create({ title, description });
+        res.status(201).json({ message: 'Todo added successfully', id: result._id });
+    } catch (error) {
+        res.status(500).json({ message: 'Error adding todo', error: error.message });
+    }
+});
+
+module.exports = router;
